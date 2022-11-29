@@ -1,6 +1,7 @@
-## Conditions are leaf nodes that either return SUCCESS or FAILURE depending on
-## a single simple condition. They should never return `RUNNING`.
+class_name ConditionLeaf
 extends Leaf
 
-class_name ConditionLeaf
+## Conditions are leaf nodes that either return SUCCESS or FAILURE depending on
+## a single simple condition. They should never return `RUNNING`.
+
 @icon("../../icons/condition.svg")

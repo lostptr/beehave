@@ -1,5 +1,6 @@
-## Base class for all leaf nodes of the tree.
+class_name Leaf
 extends BeehaveNode
 
-class_name Leaf
+## Base class for all leaf nodes of the tree.
+
 @icon("../../icons/action.svg")

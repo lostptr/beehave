@@ -1,12 +1,14 @@
-## A succeeder node will always return a `SUCCESS` status code.
+class_name AlwaysSucceedDecorator
 extends Decorator
 
-class_name AlwaysSucceedDecorator
+## A succeeder node will always return a `SUCCESS` status code.
+
 @icon("../../icons/succeed.svg")
 
-func tick(action, blackboard):
+
+func tick(actor: Node, blackboard: Blackboard) -> Status:
 	for c in get_children():
-		var response = c.tick(action, blackboard)
-		if response == RUNNING:
-			return RUNNING
-		return SUCCESS
+		var response = c.tick(actor, blackboard)
+		if response == Status.RUNNING:
+			return Status.RUNNING
+		return Status.SUCCESS

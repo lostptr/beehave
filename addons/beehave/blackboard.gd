@@ -1,6 +1,9 @@
+class_name Blackboard 
+extends RefCounted
+
 ## The blackboard is an object that can be used to store and access data between
 ## multiple nodes of the behaviour tree.
-class_name Blackboard extends RefCounted
+
 
 var blackboard: Dictionary = {}
 
@@ -8,7 +11,6 @@ var blackboard: Dictionary = {}
 func set_value(key: Variant, value: Variant, blackboard_name: String = 'default') -> void:
 	if not blackboard.has(blackboard_name):
 		blackboard[blackboard_name] = {}
-
 	blackboard[blackboard_name][key] = value
 
 
