@@ -18,6 +18,14 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		if response != FAILURE:
 			if c is ActionLeaf and response == RUNNING:
 				blackboard.set_value("running_action", c)
+			
+			if response == SUCCESS:
+				# A node that was previously running should be halted.
+				var running_action: Node = blackboard.get_value("running_action")
+				if running_action != null and running_action.has_method("halt"):
+					running_action.halt(actor, blackboard)
+					blackboard.set_value("running_action", null)
+			
 			return response
 
 	return FAILURE

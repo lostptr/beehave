@@ -117,10 +117,23 @@ _global_script_class_icons={
 [application]
 
 config/name="Beehave"
+run/main_scene="res://test/main/main.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/image="res://splash.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/unused_parameter=0
+
+[display]
+
+window/size/viewport_width=576
+window/size/viewport_height=324
+window/size/window_width_override=1152
+window/size/window_height_override=648
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

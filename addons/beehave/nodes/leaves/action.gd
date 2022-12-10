@@ -6,3 +6,9 @@ extends Leaf
 
 class_name ActionLeaf
 @icon("../../icons/action.svg")
+
+
+## This method is called whenever a long running action is being prematuraly stopped.
+## Useful for when you need to do some clean up before another node in the tree is processed.
+func halt(actor: Node, blackboard: Blackboard) -> void:
+	pass

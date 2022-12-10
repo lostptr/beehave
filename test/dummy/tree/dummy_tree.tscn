@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://b846pk5i3agjw"]
+
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_root.gd" id="1_dr7v8"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_star.gd" id="2_0h3kc"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence_star.gd" id="2_6ex3q"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="3_jktxy"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="4_3m38u"]
+[ext_resource type="Script" path="res://test/dummy/tree/is_captured.gd" id="5_urw54"]
+[ext_resource type="Script" path="res://test/dummy/tree/walk.gd" id="6_coj7p"]
+[ext_resource type="Script" path="res://test/dummy/tree/wait.gd" id="7_j5qib"]
+[ext_resource type="Script" path="res://test/dummy/tree/wink.gd" id="8_cwj8i"]
+[ext_resource type="Script" path="res://test/dummy/tree/die_anim.gd" id="9_x7jfw"]
+
+[node name="DummyTree" type="Node"]
+script = ExtResource("1_dr7v8")
+
+[node name="SelectorStarComposite" type="Node" parent="."]
+script = ExtResource("2_0h3kc")
+
+[node name="SequenceComposite" type="Node" parent="SelectorStarComposite"]
+script = ExtResource("3_jktxy")
+
+[node name="InverterDecorator" type="Node" parent="SelectorStarComposite/SequenceComposite"]
+script = ExtResource("4_3m38u")
+
+[node name="IsCaptured" type="Node" parent="SelectorStarComposite/SequenceComposite/InverterDecorator"]
+script = ExtResource("5_urw54")
+
+[node name="SequenceStarComposite" type="Node" parent="SelectorStarComposite/SequenceComposite"]
+script = ExtResource("2_6ex3q")
+
+[node name="Walk" type="Node" parent="SelectorStarComposite/SequenceComposite/SequenceStarComposite"]
+script = ExtResource("6_coj7p")
+
+[node name="Wait" type="Node" parent="SelectorStarComposite/SequenceComposite/SequenceStarComposite"]
+script = ExtResource("7_j5qib")
+
+[node name="Timer" type="Timer" parent="SelectorStarComposite/SequenceComposite/SequenceStarComposite/Wait"]
+one_shot = true
+
+[node name="Wink" type="Node" parent="SelectorStarComposite/SequenceComposite/SequenceStarComposite"]
+script = ExtResource("8_cwj8i")
+
+[node name="SequenceStarComposite" type="Node" parent="SelectorStarComposite"]
+script = ExtResource("2_6ex3q")
+
+[node name="DieAnim" type="Node" parent="SelectorStarComposite/SequenceStarComposite"]
+script = ExtResource("9_x7jfw")
+
+[connection signal="timeout" from="SelectorStarComposite/SequenceComposite/SequenceStarComposite/Wait/Timer" to="SelectorStarComposite/SequenceComposite/SequenceStarComposite/Wait" method="_on_timer_timeout"]
