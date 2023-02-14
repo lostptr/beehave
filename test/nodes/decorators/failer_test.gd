@@ -11,5 +11,5 @@ const __succeeder = "res://addons/beehave/nodes/decorators/succeeder.gd"
 func test_tick() -> void:
 	var node = auto_free(load(__source).new())
 	node.add_child(auto_free(load(__succeeder).new()))
-	assert_that(node.tick(null, null)).is_equal(BeehaveNode.FAILURE)
+	assert_that(node._execute(null, null)).is_equal(BeehaveNode.FAILURE)
 	

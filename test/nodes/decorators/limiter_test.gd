@@ -15,9 +15,9 @@ func test_max_count() -> void:
 	var actor = auto_free(Node2D.new())
 	var blackboard = auto_free(load(__blackboard).new())
 	limiter.max_count = 2
-	assert_that(limiter.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
-	assert_that(limiter.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
-	assert_that(limiter.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(limiter._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(limiter._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(limiter._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
 	
 func test_max_count_reached_instantly() -> void:
 	var limiter = auto_free(load(__source).new())
@@ -25,5 +25,5 @@ func test_max_count_reached_instantly() -> void:
 	var actor = auto_free(Node2D.new())
 	var blackboard = auto_free(load(__blackboard).new())
 	limiter.max_count = 0
-	assert_that(limiter.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(limiter._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
 	

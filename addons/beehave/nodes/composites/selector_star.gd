@@ -13,7 +13,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 		if c.get_index() < last_execution_index:
 			continue
 		
-		var response = c.tick(actor, blackboard)
+		var response = c._execute(actor, blackboard)
 		
 		if c is ConditionLeaf:
 			blackboard.set_value("last_condition", c, str(actor.get_instance_id()))

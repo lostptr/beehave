@@ -25,22 +25,22 @@ func before_test() -> void:
 	blackboard = auto_free(load(__blackboard).new())
 
 func test_always_executing_first_successful_node() -> void:
-	assert_that(selector.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
-	assert_that(selector.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(selector._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(selector._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
 	assert_that(action1.count).is_equal(2)
 	assert_that(action2.count).is_equal(0)
 	
 func test_execute_second_when_first_is_failing() -> void:
 	action1.status = BeehaveNode.FAILURE
-	assert_that(selector.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
-	assert_that(selector.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(selector._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(selector._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
 	assert_that(action1.count).is_equal(2)
 	assert_that(action2.count).is_equal(2)
 	
 func test_return_failure_of_none_is_succeeding() -> void:
 	action1.status = BeehaveNode.FAILURE
 	action2.status = BeehaveNode.FAILURE
-	assert_that(selector.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(selector._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
 	assert_that(action1.count).is_equal(1)
 	assert_that(action2.count).is_equal(1)
 	

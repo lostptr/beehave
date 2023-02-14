@@ -36,7 +36,7 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 	# We need to traverse the array in reverse since we will be manipulating it.
 	for i in _get_reversed_indexes():
 		c = _children_bag[i]
-		var response = c.tick(actor, blackboard)
+		var response = c._execute(actor, blackboard)
 		
 		if c is ConditionLeaf:
 			blackboard.set_value("last_condition", c, str(actor.get_instance_id()))

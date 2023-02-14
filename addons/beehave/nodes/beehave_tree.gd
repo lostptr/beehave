@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	
 	for child in get_children():
 		if child is BeehaveNode:
-			status = child.tick(actor, blackboard)
+			status = child._execute(actor, blackboard)
 
 	# Clear running action if nothing is running
 	if status != RUNNING:

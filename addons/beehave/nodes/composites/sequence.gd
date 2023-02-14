@@ -9,7 +9,7 @@ class_name SequenceComposite extends Composite
 
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	for c in get_children():
-		var response = c.tick(actor, blackboard)
+		var response = c._execute(actor, blackboard)
 		
 		if c is ConditionLeaf:
 			blackboard.set_value("last_condition", c, str(actor.get_instance_id()))

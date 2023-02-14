@@ -27,31 +27,31 @@ func before_test() -> void:
 
 func test_always_executing_first_successful_node() -> void:
 	sequence.random_seed = RANDOM_SEED
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
 	assert_that(action1.count).is_equal(2)
 	assert_that(action2.count).is_equal(2)
 	
 func test_execute_second_when_first_is_failing() -> void:
 	sequence.random_seed = RANDOM_SEED
 	action1.status = BeehaveNode.FAILURE
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
 	assert_that(action1.count).is_equal(2)
 	assert_that(action2.count).is_equal(1)
 	
 func test_random_even_execution() -> void:
 	sequence.random_seed = RANDOM_SEED
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
 	assert_that(action1.count).is_equal(1)
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.SUCCESS)
 	assert_that(action2.count).is_equal(2)
 	
 func test_return_failure_of_none_is_succeeding() -> void:
 	sequence.random_seed = RANDOM_SEED
 	action1.status = BeehaveNode.FAILURE
 	action2.status = BeehaveNode.FAILURE
-	assert_that(sequence.tick(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
+	assert_that(sequence._execute(actor, blackboard)).is_equal(BeehaveNode.FAILURE)
 	assert_that(action1.count).is_equal(1)
 	assert_that(action2.count).is_equal(0)
 	
